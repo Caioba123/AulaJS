@@ -1,0 +1,15 @@
+Primeira Questão
+
+Lista de Clientes:
+Nome: João Silva, Telefone: (11) 98765-4321
+Nome: Maria Oliveira, Telefone: (21) 91234-5678
+Nome: Carlos Souza, Telefone: (31) 99876-5432
+Nome: Ana Costa, Telefone: (41) 93456-7890
+Nome: Lucas Pereira, Telefone: (61) 92345-6789
+
+
+Segunda Questão
+Valor Salário: 938
+FGTS: 84
+Almoço: 2
+Salario Final: 851
