@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Notícias - Náutico, Santa Cruz e Sport</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset e tipografia */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Layout principal */
+        header {
+            background: linear-gradient(90deg, #e60000, #fff);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        header h1 {
+            font-size: 28px;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #e60000;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        nav button:hover {
+            background-color: #e60000;
+            color: #fff;
+        }
+
+        /* Containers */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        /* Formulários */
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 20px auto;
+            display: none;
+        }
+        form.active {
+            display: block;
+        }
+        form h2 {
+            margin-bottom: 20px;
+            color: #e60000;
+            text-align: center;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button.submit-btn {
+            background-color: #e60000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button.submit-btn:hover {
+            background-color: #bf0000;
+        }
+        form p {
+            text-align: center;
+            margin-top: 15px;
+        }
+        form p a {
+            color: #e60000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        form p a:hover {
+            text-decoration: underline;
+        }
+
+        /* Notícias */
+        .news-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .news-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+        }
+        .news-item h3 {
+            margin-bottom: 10px;
+            color: #e60000;
+        }
+        .news-item p {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Botões de filtro */
+        .filter-buttons {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .filter-buttons button {
+            margin: 0 5px;
+            background-color: #e60000;
+            color: #fff;
+        }
+        .filter-buttons button:hover {
+            background-color: #bf0000;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .news-item {
+                width: 90%;
+            }
+            nav button {
+                margin: 5px 0;
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Notícias Pernambucanas</h1>
+        <nav>
+            <button id="btnHome">Home</button>
+            <button id="btnLogin">Login</button>
+            <button id="btnCadastro">Cadastro</button>
+        </nav>
+    </header>
+
+    <!-- Container principal -->
+    <div class="container">
+
+        <!-- Formulário de login -->
+        <form id="loginForm">
+            <h2>Login</h2>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Senha" required>
+            <button type="submit" class="submit-btn">Entrar</button>
+            <p>Não tem conta? <a href="#" id="linkToCadastro">Cadastre-se aqui</a></p>
+        </form>
+
+        <!-- Formulário de cadastro -->
+        <form id="cadastroForm">
+            <h2>Cadastro</h2>
+            <input type="text" placeholder="Nome" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Senha" required>
+            <input type="date" placeholder="Data de Nascimento" required>
+            <select required>
+                <option value="">Selecione seu time</option>
+                <option value="Náutico">Náutico</option>
+                <option value="Santa Cruz">Santa Cruz</option>
+                <option value="Sport">Sport</option>
+            </select>
+            <button type="submit" class="submit-btn">Cadastrar</button>
+            <p>Já tem conta? <a href="#" id="linkToLogin">Faça login aqui</a></p>
+        </form>
+
+        <!-- Página inicial -->
+        <div id="homePage">
+            <div class="filter-buttons">
+                <button data-club="Todos">Todos</button>
+                <button data-club="Náutico">Náutico</button>
+                <button data-club="Santa Cruz">Santa Cruz</button>
+                <button data-club="Sport">Sport</button>
+            </div>
+            <div class="news-container" id="news"></div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Notícias simuladas
+        const noticias = [
+            { clube: "Náutico", titulo: "Náutico vence clássico dos Aflitos", conteudo: "Em um jogo emocionante, o Náutico venceu o rival..." },
+            { clube: "Santa Cruz", titulo: "Santa Cruz anuncia novo reforço", conteudo: "O Tricolor anunciou hoje a contratação do atacante..." },
+            { clube: "Sport", titulo: "Sport busca recuperação na Série B", conteudo: "O Leão enfrenta um momento de desafios e precisa..." },
+            { clube: "Náutico", titulo: "Náutico projeta temporada", conteudo: "A diretoria planeja reforços e melhorias para a temporada..." },
+            { clube: "Santa Cruz", titulo: "Santa Cruz vence fora de casa", conteudo: "Em partida fora de casa, o Santa Cruz conquistou..." },
+            { clube: "Sport", titulo: "Sport anuncia renovação de contrato", conteudo: "O Sport anunciou hoje a renovação de contrato do..." },
+        ];
+
+        const newsContainer = document.getElementById("news");
+
+        function mostrarNoticias(filtro = "Todos") {
+            newsContainer.innerHTML = "";
+            let filtradas = noticias;
+            if(filtro !== "Todos") {
+                filtradas = noticias.filter(n => n.clube === filtro);
+            }
+            filtradas.forEach(n => {
+                const div = document.createElement("div");
+                div.classList.add("news-item");
+                div.innerHTML = `<h3>${n.titulo} - ${n.clube}</h3><p>${n.conteudo}</p>`;
+                newsContainer.appendChild(div);
+            });
+        }
+
+        // Filtrar por botão
+        document.querySelectorAll(".filter-buttons button").forEach(btn => {
+            btn.addEventListener("click", () => mostrarNoticias(btn.dataset.club));
+        });
+
+        // Mostrar página inicial por padrão
+        mostrarNoticias();
+
+        // Navegação entre Home, Login e Cadastro
+        const homePage = document.getElementById("homePage");
+        const loginForm = document.getElementById("loginForm");
+        const cadastroForm = document.getElementById("cadastroForm");
+
+        function mostrarHome() {
+            homePage.style.display = "block";
+            loginForm.classList.remove("active");
+            cadastroForm.classList.remove("active");
+        }
+
+        function mostrarLogin() {
+            loginForm.classList.add("active");
+            cadastroForm.classList.remove("active");
+            homePage.style.display = "none";
+        }
+
+        function mostrarCadastro() {
+            cadastroForm.classList.add("active");
+            loginForm.classList.remove("active");
+            homePage.style.display = "none";
+        }
+
+        document.getElementById("btnHome").addEventListener("click", mostrarHome);
+        document.getElementById("btnLogin").addEventListener("click", mostrarLogin);
+        document.getElementById("btnCadastro").addEventListener("click", mostrarCadastro);
+
+        // Links internos
+        document.getElementById("linkToCadastro").addEventListener("click", e => {
+            e.preventDefault();
+            mostrarCadastro();
+        });
+        document.getElementById("linkToLogin").addEventListener("click", e => {
+            e.preventDefault();
+            mostrarLogin();
+        });
+    </script>
+</body>
+</html>
